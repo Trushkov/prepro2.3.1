@@ -1,11 +1,11 @@
-package controller;
+package web.controller;
 
-import model.User;
+import web.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import service.UserService;
+import web.service.UserService;
 
 @Controller
 public class UserController {
@@ -17,7 +17,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/users")
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String getUsers(ModelMap model){
 
         model.addAttribute("user", new User());

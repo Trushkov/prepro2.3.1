@@ -1,6 +1,6 @@
-package config;
+package web.config;
 
-import model.User;
+import web.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("java")
+@ComponentScan("web")
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
 public class HiberConfig {
