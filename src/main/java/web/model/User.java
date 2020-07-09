@@ -16,16 +16,16 @@ public class User implements Cloneable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
+    @Column(name = "id")
     private long id;
 
-    @Column(name = "First name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "Last name")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "Email")
+    @Column(name = "email")
     private String email;
 
     public User() {

@@ -1,10 +1,8 @@
 package web.dao;
 
-import web.dao.UserDao;
 import web.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,51 +21,27 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction;
-
-        transaction = session.beginTransaction();
+        Session session = sessionFactory.getCurrentSession();
         session.save(user);
-        transaction.commit();
-        session.close();
     }
 
     @Override
-    public User removeUserById(long id) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction;
-
-        transaction = session.beginTransaction();
-        User user = session.get(User.class, id);
-        if (user != null){
-        session.delete(user);
-        transaction.commit();
-        session.close();
-        return user;
-        } else return null;
+    public void remove(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        User existingUser = session.load(User.class, id);
+        session.delete(existingUser);
     }
 
     @Override
     public User getUser(long id) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction;
-
-        transaction = session.beginTransaction();
-        User user = session.get(User.class, id);
-        transaction.commit();
-        session.close();
-        return user;
+        return (User) sessionFactory.getCurrentSession().createQuery("from User where id = :id")
+                .setParameter("id", id).getSingleResult();
     }
 
     @Override
     public void updateUser(User user){
-        Session session = sessionFactory.openSession();
-        Transaction transaction;
-
-        transaction = session.beginTransaction();
+        Session session = sessionFactory.getCurrentSession();
         session.update(user);
-        transaction.commit();
-        session.close();
     }
 
     @Override

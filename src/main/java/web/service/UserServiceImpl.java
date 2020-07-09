@@ -32,9 +32,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public User removeUserById(long id) {
-        return dao.removeUserById(id);
-    }
+    public void remove(long id) { dao.remove(id); }
 
     @Override
     @Transactional
