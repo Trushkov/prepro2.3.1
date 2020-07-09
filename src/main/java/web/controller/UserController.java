@@ -19,15 +19,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public String getUsers(ModelMap model){
+    public String getUsers(ModelMap model) {
         model.addAttribute("user", new User());
         model.addAttribute("users", userService.getUsers());
         return "users";
     }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
-    public String addUser(@ModelAttribute("user") User user, Model model){
-        if (user.getId() == 0){
+    public String addUser(@ModelAttribute("user") User user, Model model) {
+        if (user.getId() == 0) {
             userService.addUser(user);
             model.addAttribute("users", userService.getUsers());
 
@@ -38,13 +38,13 @@ public class UserController {
     }
 
     @RequestMapping("/users/delete")
-    public String removeUser(@RequestParam("id") long id){
+    public String removeUser(@RequestParam("id") long id) {
         userService.remove(id);
         return "redirect:/users";
     }
 
     @RequestMapping("/edit-user")
-    public String edit(@RequestParam("id") long id, Model model){
+    public String edit(@RequestParam("id") long id, Model model) {
         model.addAttribute("user", userService.getUser(id));
         model.addAttribute("users", userService.getUsers());
         return "edit-user";
